@@ -14,9 +14,9 @@ class OutfitsController < ApplicationController
   def create
     @outfit = Outfit.new(outfit_params)
     if @outfit.save
-      redirect_to @outfit
+      redirect_to outfits_path
     else
-      render 'new'
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -42,6 +42,6 @@ class OutfitsController < ApplicationController
   private
 
   def outfit_params
-    params.require(:outfit).permit(:name, :description, :location, :lender_id, :price)
+    params.require(:outfit).permit(:name, :description, :location, :lender_id, :price, :photo)
   end
 end

@@ -1,0 +1,32 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-12">
+      <h1>All our Outfits</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <% @outfits.each do |outfit| %>
+      <div class="col-md-4">
+        <div class="outfit-card">
+          <div class="outfit-card-image"> </div>
+          <div class="outfit-card-content">
+            <div class="outfit-card-title">
+              <h4><%= outfit.name %></h4>
+            </div>
+            <p><%= outfit.description %></p>
+            <p><%= outfit.location %></p>
+            <div class="flex">
+              <div class="flex align-items-center ms-3">
+                <i class="fa-solid fa-euro-sign"></i>
+                <span><%= outfit.price %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to 'Add new outfit', new_outfit_path %>
+</div>
