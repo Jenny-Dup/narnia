@@ -1,0 +1,7 @@
+<h1><%= @outfit.name %></h1>
+<p><%= @outfit.description %></p>
+<p><%= @outfit.location %></p>
+<p><%= @outfit.price %></p>
+<% if @outfit.photo.present? %>
+ <%= image_tag outfit.photo, alt: outfit.name, size: "200x400" %>
+<% end %>

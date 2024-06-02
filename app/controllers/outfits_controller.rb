@@ -1,11 +1,11 @@
 class OutfitsController < ApplicationController
+  before_action :set_outfit, only: %i[show edit update destroy]
+
   def index
     @outfits = Outfit.all
   end
 
-  def show
-    @outfit = Outfit.find(params[:id])
-  end
+  def show; end
 
   def new
     @outfit = Outfit.new
@@ -13,35 +13,45 @@ class OutfitsController < ApplicationController
 
   def create
     @outfit = Outfit.new(outfit_params)
+    @outfit.lender = current_user
+    if params[:outfit][:photo].present?
+      upload_photo(params[:outfit][:photo])
+    end
+
     if @outfit.save
-      redirect_to outfits_path
+      redirect_to outfits_path, notice: 'Outfit was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  def edit
-    @outfit = Outfit.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @outfit = Outfit.find(params[:id])
     if @outfit.update(outfit_params)
-      redirect_to @outfit
+      redirect_to @outfit, notice: 'Outfit was successfully updated.'
     else
-      render 'edit'
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @outfit = Outfit.find(params[:id])
     @outfit.destroy
-    redirect_to outfits_path
+    redirect_to outfits_path, notice: 'Outfit was successfully destroyed.'
   end
 
   private
 
+  def set_outfit
+    @outfit = Outfit.find(params[:id])
+  end
+
   def outfit_params
     params.require(:outfit).permit(:name, :description, :location, :lender_id, :price, :photo)
+  end
+
+  def upload_photo(photo)
+    result = Cloudinary::Uploader.upload(photo.path)
+    @outfit[:photo] = result['secure_url']
   end
 end
