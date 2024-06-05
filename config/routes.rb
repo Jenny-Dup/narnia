@@ -6,4 +6,11 @@ Rails.application.routes.draw do
   resources :outfits
   resources :reservations
 
+  resources :chat_rooms do
+    resources :messages, only: [:create]
+    member do
+      post 'add_user'
+      delete 'remove_user'
+    end
+  end
 end

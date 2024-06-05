@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h1>Chat Rooms</h1>
+      <%= link_to 'New Chat Room', new_chat_room_path, class: 'btn btn-primary my-3' %>
+
+      <div class="list-group">
+        <% @chat_rooms.each do |chat_room| %>
+       <% if chat_room.users.include?(current_user) %>
+       <div class="d-flex justify-content-between align-items-center list-group-item list-group-item-action">
+            <div>
+              <%= link_to chat_room.name, chat_room_path(chat_room) %>
+              <% if chat_room.unread_count > 0 %>
+                <span class="badge">
+                  <%= chat_room.unread_count %>
+                <span>
+              <% end%>
+              <% if chat_room.last_message %>
+                <p class="text-muted mb-0"><%= chat_room.last_message.user[:first_name] + " " + chat_room.last_message.user[:last_name]%> : <%= truncate(chat_room.last_message.content, length: 50) + " " + chat_room.last_message[:created_at].strftime("%H:%M:%S") %></p>
+              <% else %>
+                <p class="text-muted mb-0">No messages yet</p>
+              <% end %>
+            </div>
+            <%= link_to 'Delete', chat_room, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          </div>
+        <% end %>
+       <% end%>
+      </div>
+    </div>
+  </div>
+</div>
