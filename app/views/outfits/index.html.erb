@@ -9,9 +9,9 @@
     <% @outfits.each do |outfit| %>
       <div class="col-md-4">
         <div class="outfit-card">
-          <div class="outfit-card-image">
+          <%# <div class="outfit-card-image">
             <%= image_tag outfit.photo, alt: outfit.name, size: "200x300" %>
-          </div>
+          <%# </div> %>
           <div class="outfit-card-content">
             <div class="outfit-card-title">
               <h4><%= outfit.name %></h4>
@@ -25,6 +25,7 @@
               </div>
             </div>
           </div>
+          <%= link_to 'See more', outfit %>
         </div>
       </div>
     <% end %>

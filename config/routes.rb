@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :users
-  resources :outfits
-  resources :reservations
 
+  resources :outfits do
+    resources :reservations
+  end
+  # reservations routes
+  # get 'reservations', to: 'reservations#index'
+  # get 'reservations/:outfit_id/new', to: 'reservations#new', as: 'new_reserve'
+  # post 'reservations/:outfit_id', to: 'reservations#create', as: 'reserve_outfit'
 end
