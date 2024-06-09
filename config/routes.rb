@@ -4,11 +4,16 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :chat_rooms do
+    resources :messages, only: [:create]
+    member do
+      post 'add_user'
+      delete 'remove_user'
+    end
+  end
+
   resources :outfits do
     resources :reservations
   end
-  # reservations routes
-  # get 'reservations', to: 'reservations#index'
-  # get 'reservations/:outfit_id/new', to: 'reservations#new', as: 'new_reserve'
-  # post 'reservations/:outfit_id', to: 'reservations#create', as: 'reserve_outfit'
+
 end

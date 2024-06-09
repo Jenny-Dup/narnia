@@ -4,6 +4,8 @@ require 'open-uri'
 User.destroy_all
 Outfit.destroy_all
 Reservation.destroy_all
+Message.destroy_all
+ChatRoom.destroy_all
 
 # Create Users
 user1 = User.create!(
@@ -87,5 +89,12 @@ reservation2 = Reservation.create!(
   date: Date.today,
   renter_id: user1.id
 )
+
+chat_room1 = ChatRoom.create!(name: 'Pre-seeded Chat Room')
+chat_room2 = ChatRoom.create!(name: 'Another Chat Room')
+
+chat_room1.users << user1
+chat_room2.users << user1
+chat_room2.users << user2
 
 puts "Seed data created successfully!"
