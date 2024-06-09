@@ -1,0 +1,28 @@
+<h1>Available Outfits for Reservation</h1>
+
+<% if @outfits.present? %>
+  <div class="outfits-grid">
+    <% @outfits.each do |outfit| %>
+      <div class="outfit">
+        <h2><%= outfit.name %></h2>
+        <p><%= outfit.description %></p>
+        <%= link_to 'See more', outfit_path(outfit), class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>No outfits available for viewing at this time.</p>
+<% end %>
+
+<style>
+  .outfits-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .outfit {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+  }
+</style>
