@@ -2,6 +2,6 @@
 <p><%= @outfit.description %></p>
 <p><%= @outfit.location %></p>
 <p><%= @outfit.price %></p>
-<% if @outfit.photo.present? %>
- <%= image_tag outfit.photo, alt: outfit.name, size: "200x400" %>
-<% end %>
+
+<%= link_to 'Back', outfits_path, class: 'btn btn-secondary' %>
+<%= link_to 'Reserve me', new_outfit_reservation_path(@outfit) %>

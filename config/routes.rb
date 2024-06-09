@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :users
-  resources :outfits
-  resources :reservations
 
   resources :chat_rooms do
     resources :messages, only: [:create]
@@ -13,4 +11,9 @@ Rails.application.routes.draw do
       delete 'remove_user'
     end
   end
+
+  resources :outfits do
+    resources :reservations
+  end
+
 end

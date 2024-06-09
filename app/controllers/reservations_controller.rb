@@ -1,47 +1,28 @@
 class ReservationsController < ApplicationController
   def index
-    @reservations = Reservation.all
-  end
-
-  def show
-    @reservation = Reservation.find(params[:id])
+    @outfits = Outfit.all
   end
 
   def new
+    @outfit = Outfit.find(params[:outfit_id])
     @reservation = Reservation.new
   end
 
   def create
-    @reservation = Reservation.new(reservation_params)
+    @outfit = Outfit.find(params[:outfit_id])
+    @reservation = current_user.reservations.build(reservation_params)
+    @reservation.outfit = @outfit
+
     if @reservation.save
-      redirect_to @reservation
+      redirect_to @outfit, notice: 'Reservation was successfully created.'
     else
-      render 'new'
+      render :new  # Render the new reservation form on validation errors
     end
-  end
-
-  def edit
-    @reservation = Reservation.find(params[:id])
-  end
-
-  def update
-    @reservation = Reservation.find(params[:id])
-    if @reservation.update(reservation_params)
-      redirect_to @reservation
-    else
-      render 'edit'
-    end
-  end
-
-  def destroy
-    @reservation = Reservation.find(params[:id])
-    @reservation.destroy
-    redirect_to reservations_path
   end
 
   private
 
   def reservation_params
-    params.require(:reservation).permit(:outfit_id, :rating, :date, :renter_id)
+    params.require(:reservation).permit(:start_date, :end_date)
   end
 end

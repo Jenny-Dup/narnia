@@ -56,23 +56,23 @@ outfit3 = Outfit.create!(
 )
 
 # Attach photos using ActiveStorage
-outfit1.photo.attach(
-  io: URI.open("https://res.cloudinary.com/dms0h3tii/image/upload/v1717348645/MILLA_117_1024x_ryiqk4.jpg"),
-  filename: 'summer_floral_dress.jpg',
-  content_type: 'image/jpeg'
-)
+# outfit1.photo.attach(
+#   io: URI.open("https://res.cloudinary.com/de7ixgetx/image/upload/v1717598574/MILLA_117_1024x_ryiqk4_zzag4b.jpg"),
+#   filename: 'summer_floral_dress.jpg',
+#   content_type: 'image/jpeg'
+# )
 
-outfit2.photo.attach(
-  io: URI.open("https://res.cloudinary.com/dms0h3tii/image/upload/v1717348786/Millanova_137_4f56a10d-721d-4ba5-adeb-dce2e52ac629-314051_bzneup.jpg"),
-  filename: 'blue_hydrangea_maxi_dress.jpg',
-  content_type: 'image/jpeg'
-)
+# outfit2.photo.attach(
+#   io: URI.open("https://res.cloudinary.com/de7ixgetx/image/upload/v1717598212/Millanova_137_4f56a10d-721d-4ba5-adeb-dce2e52ac629-314051_bzneup_kkm9mv.jpg"),
+#   filename: 'blue_hydrangea_maxi_dress.jpg',
+#   content_type: 'image/jpeg'
+# )
 
-outfit3.photo.attach(
-  io: URI.open("https://res.cloudinary.com/dms0h3tii/image/upload/v1717348782/MILLANOVA_1_bbe37b5f-5e4c-4fcd-bce5-a8c06b95b0b0-829457_xp31a1.jpg"),
-  filename: 'white_neck_sleeves_dress.jpg',
-  content_type: 'image/jpeg'
-)
+# outfit3.photo.attach(
+#   io: URI.open("https://res.cloudinary.com/de7ixgetx/image/upload/v1717598624/MILLANOVA_1_bbe37b5f-5e4c-4fcd-bce5-a8c06b95b0b0-829457_xp31a1_dv0ka1.jpg"),
+#   filename: 'white_neck_sleeves_dress.jpg',
+#   content_type: 'image/jpeg'
+# )
 
 puts "Creating Reservations..."
 # Create Reservations

@@ -5,7 +5,9 @@ class OutfitsController < ApplicationController
     @outfits = Outfit.all
   end
 
-  def show; end
+  def show
+    @reservation = Reservation.new  # Initialize a new reservation object for the form
+  end
 
   def new
     @outfit = Outfit.new
