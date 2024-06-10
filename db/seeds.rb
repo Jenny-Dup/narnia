@@ -1,9 +1,9 @@
 require 'open-uri'
 
 # Clear existing data
+Reservation.destroy_all
 User.destroy_all
 Outfit.destroy_all
-Reservation.destroy_all
 Message.destroy_all
 ChatRoom.destroy_all
 
@@ -55,39 +55,38 @@ outfit3 = Outfit.create!(
   price: 150
 )
 
-# Attach photos using ActiveStorage
-# outfit1.photo.attach(
-#   io: URI.open("https://res.cloudinary.com/de7ixgetx/image/upload/v1717598574/MILLA_117_1024x_ryiqk4_zzag4b.jpg"),
-#   filename: 'summer_floral_dress.jpg',
-#   content_type: 'image/jpeg'
-# )
+outfit1.photo.attach(
+  io: URI.open("https://res.cloudinary.com/de7ixgetx/image/upload/v1717598574/MILLA_117_1024x_ryiqk4_zzag4b.jpg"),
+  filename: 'summer_floral_dress.jpg',
+  content_type: 'image/jpeg'
+)
 
-# outfit2.photo.attach(
-#   io: URI.open("https://res.cloudinary.com/de7ixgetx/image/upload/v1717598212/Millanova_137_4f56a10d-721d-4ba5-adeb-dce2e52ac629-314051_bzneup_kkm9mv.jpg"),
-#   filename: 'blue_hydrangea_maxi_dress.jpg',
-#   content_type: 'image/jpeg'
-# )
+outfit2.photo.attach(
+  io: URI.open("https://res.cloudinary.com/de7ixgetx/image/upload/v1717598212/Millanova_137_4f56a10d-721d-4ba5-adeb-dce2e52ac629-314051_bzneup_kkm9mv.jpg"),
+  filename: 'blue_hydrangea_maxi_dress.jpg',
+  content_type: 'image/jpeg'
+)
 
-# outfit3.photo.attach(
-#   io: URI.open("https://res.cloudinary.com/de7ixgetx/image/upload/v1717598624/MILLANOVA_1_bbe37b5f-5e4c-4fcd-bce5-a8c06b95b0b0-829457_xp31a1_dv0ka1.jpg"),
-#   filename: 'white_neck_sleeves_dress.jpg',
-#   content_type: 'image/jpeg'
-# )
+outfit3.photo.attach(
+  io: URI.open("https://res.cloudinary.com/de7ixgetx/image/upload/v1717598624/MILLANOVA_1_bbe37b5f-5e4c-4fcd-bce5-a8c06b95b0b0-829457_xp31a1_dv0ka1.jpg"),
+  filename: 'white_neck_sleeves_dress.jpg',
+  content_type: 'image/jpeg'
+)
 
 puts "Creating Reservations..."
 # Create Reservations
 reservation1 = Reservation.create!(
   outfit: outfit1,
-  rating: 5,
-  date: Date.today,
-  renter_id: user2.id
+  user: user1,
+  start_date: Date.today - 1,
+  end_date: Date.today + 15
 )
 
 reservation2 = Reservation.create!(
   outfit: outfit2,
-  rating: 4,
-  date: Date.today,
-  renter_id: user1.id
+  user: user2,
+  start_date: Date.today,
+  end_date: Date.today + 10
 )
 
 chat_room1 = ChatRoom.create!(name: 'Pre-seeded Chat Room')
