@@ -15,7 +15,7 @@ export function calculateTotalPrice() {
         const dayDiff = timeDiff / (1000 * 3600 * 24) + 1; // +1 to include the start date
         if (dayDiff > 0) {
           const totalPrice = dayDiff * pricePerDay;
-          totalPriceElement.textContent = `Total Price: $${totalPrice.toFixed(2)}`;
+          totalPriceElement.textContent = `Total Price: €${totalPrice.toFixed(2)}`;
         } else {
           totalPriceElement.textContent = 'Invalid date range';
         }
