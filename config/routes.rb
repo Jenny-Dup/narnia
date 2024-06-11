@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "pages#home"
+  root to: "outfits#index"
 
   resources :users
+  resources :reservations, only: %i[show destroy edit update]
 
   resources :chat_rooms do
     resources :messages, only: [:create]
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :outfits do
-    resources :reservations
+    resources :reservations, only: %i[new create]
   end
 
 end
