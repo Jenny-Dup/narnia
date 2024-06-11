@@ -21,6 +21,15 @@
     <%= form.date_field :end_date %>
   </div>
 
+  <div class="outfit-price">
+    <p>Price per day: €<%= @outfit.price %><p>
+    <span id="outfit-price" data-price-per-day="<%= @outfit.price %>"></span>
+  </div>
+
+  <div class="total-price">
+    <h3 id="total-price">Total Price: $<span id="reservation_total_price">0.00</span></h3>
+  </div>
+
   <%= form.hidden_field :outfit_id, value: @outfit.id %>
 
   <div class="actions">
