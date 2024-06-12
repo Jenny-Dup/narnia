@@ -1,19 +1,30 @@
-<h1>My Reservations</h1>
+<h1 class="my-4 text-center">My Reservations</h1>
 
-<% @reservations.each do |reservation| %>
-  <div class="reservation">
-    <h3><%= reservation.outfit.name %></h3>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <% @reservations.each do |reservation| %>
+        <div class="card custom-card mb-3">
+          <div class="card-body">
+            <h3 class="card-title"><%= reservation.outfit.name %></h3>
 
-    <% if reservation.start_date %>
-      <p><strong>Reserved from:</strong> <%= reservation.start_date.strftime('%B %e, %Y') %></p>
-    <% end %>
+            <% if reservation.start_date %>
+              <p class="card-text"><strong>Reserved from:</strong> <%= reservation.start_date.strftime('%B %e, %Y') %></p>
+            <% end %>
 
-    <% if reservation.end_date %>
-      <p><strong>Reserved to:</strong> <%= reservation.end_date.strftime('%B %e, %Y') %></p>
-    <% end %>
+            <% if reservation.end_date %>
+              <p class="card-text"><strong>Reserved to:</strong> <%= reservation.end_date.strftime('%B %e, %Y') %></p>
+            <% end %>
 
-    <%= link_to 'Edit', edit_reservation_path(reservation), class: 'btn btn-primary' %>
-    <%= link_to 'Delete', reservation_path(reservation), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-
+            <div class="d-flex justify-content-between">
+              <%= link_to 'Edit', edit_reservation_path(reservation), class: 'btn btn-primary' %>
+              <%= link_to reservation_path(reservation), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>
