@@ -1,0 +1,19 @@
+.card.custom-card {
+  background-color: #f8f9fa; //
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.card.custom-card .card-body {
+  padding: 20px;
+}
+
+.card.custom-card .card-title {
+  margin-bottom: 15px;
+}
+
+.btn-primary, .btn-danger {
+  margin-right: 10px;
+}
