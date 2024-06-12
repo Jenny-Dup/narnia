@@ -1,1 +1,46 @@
 // Specific CSS for your home-page
+// app/assets/stylesheets/custom.scss
+.outfit-card {
+  border: none;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .outfit-card-image-wrapper {
+    position: relative;
+
+    .outfit-image {
+      transition: transform 0.3s ease;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+
+    .outfit-card-details {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover .outfit-image {
+      transform: scale(1.05);
+    }
+
+    &:hover .outfit-card-details {
+      opacity: 1;
+    }
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .btn-primary {
+    margin-top: 10px;
+  }
+}
