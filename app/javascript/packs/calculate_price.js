@@ -20,7 +20,7 @@ export function calculateTotalPrice() {
           totalPriceElement.textContent = 'Invalid date range';
         }
       } else {
-        totalPriceElement.textContent = 'Total Price: $0.00';
+        totalPriceElement.textContent = 'Total Price: €0.00';
       }
     };
 

@@ -1,7 +1,21 @@
-<h1><%= @outfit.name %></h1>
-<p><%= @outfit.description %></p>
-<p><%= @outfit.location %></p>
-<p><%= @outfit.price %></p>
-
-<%= link_to 'Back', outfits_path, class: 'btn btn-secondary' %>
-<%= link_to 'Reserve me', new_outfit_reservation_path(@outfit) %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title"><%= @outfit.name %></h1>
+          <p class="card-text"><%= @outfit.description %></p>
+          <p class="card-text"><strong>Location:</strong> <%= @outfit.location %></p>
+          <p class="card-text"><strong>Price:</strong> <i class="fa-solid fa-euro-sign"></i> <%= @outfit.price %></p>
+          <%= link_to 'Back', outfits_path, class: 'btn btn-secondary me-2' %>
+          <%= link_to 'Reserve me', new_outfit_reservation_path(@outfit), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <%= image_tag @outfit.photo, class: 'card-img-top' %>
+      </div>
+    </div>
+  </div>
+</div>
