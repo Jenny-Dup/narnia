@@ -43,10 +43,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_161019) do
   end
 
   create_table "chat_rooms", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_chat_rooms_on_name", unique: true
   end
 
   create_table "chat_rooms_users", id: false, force: :cascade do |t|
@@ -57,11 +56,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_161019) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.text "content", null: false
-    t.bigint "chat_room_id", null: false
     t.bigint "user_id", null: false
+    t.bigint "chat_room_id", null: false
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "viewed"
     t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end

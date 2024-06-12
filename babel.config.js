@@ -1,23 +1,23 @@
-module.exports = function(api) {
-  var validEnv = ['development', 'test', 'production']
-  var currentEnv = api.env()
-  var isDevelopmentEnv = api.env('development')
-  var isProductionEnv = api.env('production')
-  var isTestEnv = api.env('test')
+const babel = require('@babel/core')
 
-  if (!validEnv.includes(currentEnv)) {
+module.exports = function (api) {
+  api.cache(true); // Cache configuration for faster builds
+
+  const env = process.env.NODE_ENV || process.env.BABEL_ENV; // Use both NODE_ENV and BABEL_ENV
+
+  const isDevelopment = env === 'development';
+  const isProduction = env === 'production';
+  const isTest = env === 'test';
+
+  if (!['development', 'test', 'production'].includes(env)) {
     throw new Error(
-      'Please specify a valid `NODE_ENV` or ' +
-        '`BABEL_ENV` environment variables. Valid values are "development", ' +
-        '"test", and "production". Instead, received: ' +
-        JSON.stringify(currentEnv) +
-        '.'
-    )
+      `Invalid environment: ${env}. Please use "development", "test", or "production".`
+    );
   }
 
   return {
     presets: [
-      isTestEnv && [
+      isTest && [
         '@babel/preset-env',
         {
           targets: {
@@ -25,58 +25,31 @@ module.exports = function(api) {
           }
         }
       ],
-      (isProductionEnv || isDevelopmentEnv) && [
+      (isProduction || isDevelopment) && [
         '@babel/preset-env',
         {
-          forceAllTransforms: true,
-          useBuiltIns: 'entry',
-          corejs: 3,
+          bugfixes: true, // Enable bugfix transforms
+          useBuiltIns: 'usage',  // Polyfill only used features
+          corejs: { version: 3, proposals: true },
           modules: false,
-          exclude: ['transform-typeof-symbol']
+          // exclude: ['transform-typeof-symbol'] // Generally not needed
         }
       ]
     ].filter(Boolean),
     plugins: [
       'babel-plugin-macros',
       '@babel/plugin-syntax-dynamic-import',
-      isTestEnv && 'babel-plugin-dynamic-import-node',
+      isTest && 'babel-plugin-dynamic-import-node',
       '@babel/plugin-transform-destructuring',
-      [
-        '@babel/plugin-proposal-class-properties',
-        {
-          loose: true
-        }
-      ],
-      [
-        '@babel/plugin-proposal-object-rest-spread',
-        {
-          useBuiltIns: true
-        }
-      ],
-      [
-        '@babel/plugin-proposal-private-methods',
-        {
-          loose: true
-        }
-      ],
-      [
-        '@babel/plugin-proposal-private-property-in-object',
-        {
-          loose: true
-        }
-      ],
-      [
-        '@babel/plugin-transform-runtime',
-        {
-          helpers: false
-        }
-      ],
-      [
-        '@babel/plugin-transform-regenerator',
-        {
-          async: false
-        }
-      ]
+      ['@babel/plugin-proposal-class-properties', { loose: true }],
+      ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
+      ['@babel/plugin-proposal-private-methods', { loose: true }],
+      ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+      ['@babel/plugin-transform-runtime', {
+        regenerator: true, // Use runtime for async/await
+        helpers: true,     // Enable helper functions
+      }],
+      // ['@babel/plugin-transform-regenerator', { async: false }] // Not necessary with @babel/plugin-transform-runtime
     ].filter(Boolean)
-  }
-}
+  };
+};
